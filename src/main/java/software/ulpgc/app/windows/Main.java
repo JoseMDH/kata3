@@ -19,8 +19,10 @@ public class Main {
         HashMap<Integer, Integer> titlesPerYearStats = new HashMap<>();
         HashMap<Title.TitleType, Integer> titlesTypeCountStats = new HashMap<>();
         for (Title title : titles) {
-            titlesPerYearStats.put(title.start_year(), titlesPerYearStats.getOrDefault(title.start_year(), 0) + 1);
             titlesTypeCountStats.put(title.titleType(), titlesTypeCountStats.getOrDefault(title.titleType(), 0) + 1);
+            if (title.start_year() != 0) {
+                titlesPerYearStats.put(title.start_year(), titlesPerYearStats.getOrDefault(title.start_year(), 0) + 1);
+            }
         }
         MainFrame mainFrame = new MainFrame();
         MoviesBarchartLoader loader = new MoviesBarchartLoader(new FromMapBarchartElementBuilder<>(titlesPerYearStats).build(), new FromMapBarchartElementBuilder<>(titlesTypeCountStats).build());
